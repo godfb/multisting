@@ -1,6 +1,6 @@
 "use strict";
 
-var webSocketsServerPort = 1337;
+var webSocketsServerPort = 3000;
 
 var webSocketServer = require('websocket').server;
 var http = require('http');
