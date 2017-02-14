@@ -25,7 +25,7 @@ var num = 0;
 wsServer.on('request', function(request) {
     console.log((new Date()) + ' Connection from origin ' + request.origin + '.');
 
-    var connection = request.accept(null, request.origin); 
+    var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
 
     connection.on('message', function(message) {
