@@ -15,7 +15,8 @@ server.listen(process.env.PORT || webSocketsServerPort  , function() {
 });
 
 var wsServer = new webSocketServer({
-    httpServer: server
+    httpServer: server,
+    autoAcceptConnections: true
 });
 
 var timer = setInterval(function fak(){console.log(process.env.PORT)}, 4000)
