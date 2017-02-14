@@ -8,7 +8,7 @@ var http = require('http');
 var clients = []
 
 var server = http.createServer(function(request, response) {
-    // Not important for us. We're writing WebSocket server, not HTTP server
+    console.log((new Date()) + ' Received request for ' + request.url); response.writeHead(404); response.end();
 });
 server.listen(process.env.PORT || webSocketsServerPort  , function() {
     console.log((new Date()) + " Server is listening on port " + process.env.PORT || webSocketsServerPort);
@@ -19,7 +19,7 @@ var wsServer = new webSocketServer({
     autoAcceptConnections: true
 });
 
-var timer = setInterval(function fak(){console.log(process.env.PORT)}, 4000)
+    var timer = setInterval(function fak(){console.log(process.env.PORT)}, 4000)
 
 var num = 0;
 
