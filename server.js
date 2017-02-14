@@ -10,11 +10,8 @@ var clients = []
 var server = http.createServer(function(request, response) {
     // Not important for us. We're writing WebSocket server, not HTTP server
 });
-// server.listen(process.env.PORT || webSocketsServerPort  , function() {
-//     console.log((new Date()) + " Server is listening on port " + process.env.PORT || webSocketsServerPort);
-// });
-server.listen(webSocketsServerPort  , function() {
-    console.log((new Date()) + " Server is listening on port " + webSocketsServerPort);
+server.listen(process.env.PORT || webSocketsServerPort  , function() {
+    console.log((new Date()) + " Server is listening on port " + process.env.PORT || webSocketsServerPort);
 });
 
 var wsServer = new webSocketServer({
