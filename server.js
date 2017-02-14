@@ -1,6 +1,6 @@
 "use strict";
 
-var webSocketsServerPort = 3000;
+var webSocketsServerPort = 80;
 
 var webSocketServer = require('websocket').server;
 var http = require('http');
@@ -10,8 +10,11 @@ var clients = []
 var server = http.createServer(function(request, response) {
     // Not important for us. We're writing WebSocket server, not HTTP server
 });
-server.listen(process.env.PORT || webSocketsServerPort  , function() {
-    console.log((new Date()) + " Server is listening on port " + process.env.PORT || webSocketsServerPort);
+// server.listen(process.env.PORT || webSocketsServerPort  , function() {
+//     console.log((new Date()) + " Server is listening on port " + process.env.PORT || webSocketsServerPort);
+// });
+server.listen(webSocketsServerPort  , function() {
+    console.log((new Date()) + " Server is listening on port " + webSocketsServerPort);
 });
 
 var wsServer = new webSocketServer({
