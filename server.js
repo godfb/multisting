@@ -7,11 +7,13 @@ var http = require('http');
 
 var clients = []
 
+var PORT = process.env.PORT || webSocketsServerPort;
+
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url); response.writeHead(404); response.end();
 });
-server.listen(process.env.PORT || webSocketsServerPort  , function() {
-    console.log((new Date()) + " Server is listening on port " + process.env.PORT || webSocketsServerPort);
+server.listen(PORT , function() {
+    console.log((new Date()) + " Server is listening on port " +  PORT);
 });
 
 var wsServer = new webSocketServer({
@@ -19,14 +21,13 @@ var wsServer = new webSocketServer({
     autoAcceptConnections: true
 });
 
-    var timer = setInterval(function fak(){console.log(process.env.PORT)}, 4000)
+    // var timer = setInterval(function fak(){console.log(process.env.PORT)}, 4000)
 
 var num = 0;
 
-wsServer.on('request', function(request) {
-    console.log((new Date()) + ' Connection from origin ' + request.origin + '.');
-
-    var connection = request.accept('echo-protocol', request.origin);
+wsServer.on('connect', function(connection) {
+    console.log((new Date()) + ' Connection from origin ' + connection.origin + '.');
+    // var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
 
     connection.on('message', function(message) {
@@ -57,8 +58,6 @@ wsServer.on('request', function(request) {
         }
     });
     connection.on('close', function(connection) {
-        console.log("Get the fuck out");
-
         //clients.splice(index, 1);
     });
 
