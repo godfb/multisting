@@ -1,6 +1,6 @@
 "use strict";
 
-var webSocketsServerPort = 8080;
+var webSocketsServerPort = 80;
 
 var webSocketServer = require('websocket').server;
 var http = require('http');
@@ -10,9 +10,7 @@ var clients = []
 var PORT = process.env.PORT || webSocketsServerPort;
 
 var server = http.createServer(function(request, response) {
-    console.log((new Date()) + ' Received request for ' + request.url);
-    response.writeHead(404);
-    response.end();
+    console.log((new Date()) + ' Received request for ' + request.url); response.writeHead(404); response.end();
 });
 server.listen(PORT , function() {
     console.log((new Date()) + " Server is listening on port " +  PORT);
@@ -23,19 +21,21 @@ var wsServer = new webSocketServer({
     autoAcceptConnections: true
 });
 
+    // var timer = setInterval(function fak(){console.log(process.env.PORT)}, 4000)
+
 var num = 0;
 
 wsServer.on('connect', function(connection) {
-    // console.log((new Date()) + ' Connection from origin ' + request.origin +  '.');
+    console.log((new Date()) + ' Connection from origin ' + connection.origin + '.');
     // var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
 
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
             
-        console.log(message)
 			var msg_string = message.utf8Data
 			var split = msg_string.split(":");
+			
             connection.id = split[0];
             
 			if(split[1] == "connected"){
